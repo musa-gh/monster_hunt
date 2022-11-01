@@ -104,6 +104,8 @@ new Vue({
   },
 });
 
+//! Tekrar Yazılmaya açlışılacak
+
 // player_heal: function (i) {
 //       if (i <= 0) {
 //         this.player_heal = 0;
