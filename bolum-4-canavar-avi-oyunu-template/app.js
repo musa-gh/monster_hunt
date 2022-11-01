@@ -4,6 +4,7 @@ new Vue({
     player_heal: 100,
     monster_heal: 100,
     game_is_on: false,
+    logs: [],
   },
   methods: {
     start_game: function () {
@@ -12,6 +13,7 @@ new Vue({
     attack: function () {
       let point = Math.ceil(Math.random() * 10);
       this.monster_heal -= point;
+      this.add_to_log({ turn: "P", text: "Player Attack (" + point + ")" });
       this.monster_attack();
       //   console.log("M :" + this.monster_heal);
       //   console.log("P :" + this.player_heal);
@@ -19,6 +21,10 @@ new Vue({
     speacial_attack: function () {
       let point = Math.ceil(Math.random() * 25);
       this.monster_heal -= point;
+      this.add_to_log({
+        turn: "P",
+        text: "Special Player Attack (" + point + ")",
+      });
       this.monster_attack();
       //   console.log("M :" + this.monster_heal);
       //   console.log("P :" + this.player_heal);
@@ -26,18 +32,24 @@ new Vue({
     heal_up: function () {
       let point = Math.ceil(Math.random() * 20);
       this.player_heal += point;
+      this.add_to_log({ turn: "P", text: "Heal up (" + point + ")" });
       this.monster_attack();
       //   console.log("M :" + this.monster_heal);
       //   console.log("P :" + this.player_heal);
     },
     give_up: function () {
       this.player_heal = 0;
+      this.add_to_log({ turn: "P", text: "Give Up" });
       //   console.log("M :" + this.monster_heal);
       //   console.log("P :" + this.player_heal);
     },
     monster_attack() {
       let point = Math.ceil(Math.random() * 15);
       this.player_heal -= point;
+      this.add_to_log({ turn: "M", text: "Monster attack (" + point + ")" });
+    },
+    add_to_log: function (log) {
+      this.logs.push(log);
     },
   },
   watch: {
