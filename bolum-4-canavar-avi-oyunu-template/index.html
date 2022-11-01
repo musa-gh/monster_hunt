@@ -49,7 +49,7 @@
             </div>
         </section>
 
-        <section class="row log" v-if="game_is_on">
+        <section class="row log" v-if="logs.length > 0">
             <div class="small-12 columns">
                 <ul>
                     <li :class="{'player-turn': log.turn == 'P', 'monster-turn' : log.turn == 'M'}" v-for="log in logs">
